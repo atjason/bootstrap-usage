@@ -7,15 +7,45 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   </head>
   <body>
-    <div id="alert" class="alert alert-warning alert-dismissible fade show" role="alert">
-      <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <div id="alert" class="alert fade show" style="display: none;" role="alert">
+      <span id="alertTitle">abc</span>
+      <button type="button" class="close" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
 
+    <button id='successBtn'>Show Success Alert</button>
+    <button id='dangerBtn'>Show Danger Alert</button>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <script>
+      function showAlert(title, type) {
+        const alert = $('#alert')
+        if (type === 'danger') {
+          alert.removeClass('alert-success').addClass('alert-danger')
+        } else {
+          alert.removeClass('alert-danger').addClass('alert-success')
+        }
+        alert.find('#alertTitle').text(title)
+        alert.show()
+      }
+
+      $(document).ready(function() {
+        const alert = $('#alert')
+        alert.find('button.close').click(function() {
+          alert.hide()
+        })
+
+        $('#successBtn').click(function() {
+          showAlert('Success message')
+        })
+        $('#dangerBtn').click(function() {
+          showAlert('Danger message', 'danger')
+        })
+      })
+    </script>
   </body>
 </html>
